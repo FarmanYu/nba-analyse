@@ -1,0 +1,65 @@
+body, h1, h2, h3, h4, h5, h6, p, pre, blockquote, dl, dt, dd, ul, ol, li, form, fieldset, legend, input, textarea, button, th, td { margin:0; padding:0; }
+body {font:12px/1.5 "微软雅黑","Lucida Grande", arial, helvetica, sans-serif;word-break:break-all; }
+table {border-collapse:collapse; border-spacing:0; }
+fieldset, img {border:none;vertical-align:top; }
+ul, ol {list-style:none outside; }/* outside重置IE6,7缩进 */
+h1, h2, h3, h4, h5, h6 {font-size:100%; font-weight:normal; }
+select, input, button, textarea {font-size:100%; vertical-align:middle;}/* 使表单元素能继承父级字体大小 */
+a {color:#636363; text-decoration:none; cursor:pointer;}
+a:hover {color:#F9262F; text-decoration:none; }
+table{border:1px solid #d9d9d9;}
+table tr{border-bottom:1px solid #d9d9d9;}
+table th,table td{border-right:1px solid #d9d9d9;}
+table th{height:30px; line-height:30px;background:#f1f1f1;}
+table td{height:24px; line-height:24px;}
+table tbody tr:hover{background:#eef8fc;}
+.clear{ clear:both;}
+.red{color:red;}
+.blue{color:#0033FF;}
+.w80{width:80px;}
+.w36{width:36px;}
+.w50{width:50px;}
+.screening{ margin:3px 0 10px;}
+.screening select{padding:0 3px;margin:0 5px;}
+.screening label{margin-left:10px;}
+
+.scheduleList td{ text-align:center; overflow:hidden;}
+
+.analysisCon{position:absolute;left:200px;top:0;bottom:0;right:200px;}
+.playerBar{width:150px;position:fixed;left:40px;top:0;border:1px solid #ccc;}
+.playerBar h2{height:28px;line-height:28px;padding:0 5px;background:#CDCDCD;font-size:16px;border-bottom:1px solid #ccc;}
+.playerBar select{margin:3px 3px;}
+.playerList{padding:5px; padding-top:0;}
+.playerList .tab{overflow:hidden;}
+.playerList .tab a{width:70px;float:left;text-align:center;}
+.playerList .tab a.cur{background:#FF3333;color:#fff;border-radius:5px 5px 0 0;}
+.playerList .tab_con{}
+.playerList .tab_con a{display:block;height:24px; line-height:24px;padding-left:10px;font-size:14px;margin:2px 0;}
+.playerList .tab_con a span{display:inline-block;width:18px;height:18px; background:url(img/hot.png) no-repeat 0 0;margin-left:20px; vertical-align:middle;} 
+.playerList .tab_con a:hover,.playerList .tab_con a.cur{background:#eef8fc;color:#636363;}
+.playerList .tab_con h3{padding:2px 5px; background:#F1F1F1; height:26px; line-height:26px;font-size:14px;}
+.playerList .tab_con > div {padding:5px 0;}
+
+.table_playerContrast{margin-bottom:20px;}
+.table_playerContrast td{text-align:center;}
+
+
+.teamBar{width:150px;position:fixed;right:40px;top:0;border:1px solid #ccc;}
+.teamBar h2{height:28px;line-height:28px;padding:0 5px;background:#CDCDCD;font-size:16px;border-bottom:1px solid #ccc;}
+
+/*分析结果*/
+.analysis_result{border:1px solid #ccc;padding-bottom:20px;}
+.analysis_result h2{height:30px;line-height:30px;padding-left:15px; background:#CDCDCD;font-size:14px;}
+.host_result,.guest_result{width:50%;float:left;}
+.analysis_result h3{font-size:14px;padding:3px 15px;}
+.analysis_result .item{padding:2px 15px; overflow:hidden;}
+.analysis_result label{float:left;}
+.analysis_result .grade_box{float:left;}
+.analysis_result .item span.bg{display:inline-block;width:12px;height:12px;background:#ccc;cursor:pointer; margin-top:2px;}
+.analysis_result .item span.cur{background:#528500;}
+.score_result{margin-top:20px;border-top:1px solid #ccc;padding-top:10px;}
+.mark{font-size:16px;padding:2px 5px;font-weight:900; cursor:pointer;color:#333;} 
+
+
+/*球队信息*/
+#teamsContainer{position:absolute;top:0;right:0;bottom:0;left:200px;}

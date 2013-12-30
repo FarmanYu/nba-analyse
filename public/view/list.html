@@ -1,0 +1,66 @@
+<div ng-controller="listCtrl">
+    <div class="screening" ng-test>
+    <label>时间：</label>
+          <select ng-model="year" ng-change="getMatchList()">
+              <option>2012</option>
+              <option>2013</option>
+          </select>
+          <select ng-model="mouth"  ng-change="getMatchList()">
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06</option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>		  
+          </select>
+    <label>球队：</label>
+          <select  ng-model="teamId" ng-change="getMatchList()">
+              <option value="all">查看全部</option>
+              <option ng-repeat="team in teams" value="{{team.id}}">{{team.name}}</option>
+          </select>
+    <label>主客场：</label>
+          <select ng-model="hostType" ng-change="getMatchList()">
+              <option value="all">全部</option>
+              <option value="host">主场</option>
+              <option value="guest">客场</option>
+          </select>
+    </div>
+    <div class="scheduleList">
+       <table width="100%">
+            <thead>
+                <tr>
+                    <th>时间</th>
+                    <th>类型</th>
+                    <th>主场</th>
+                    <th>比分</th>
+                    <th>客场</th>
+                    <th>统计/分析</th>
+                    <th width="30%">赛前分析</th>
+                    <th width="30%">赛后分析</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="list in listData">
+                    <td>{{list.time}}</td>
+                    <td>常规赛</td>
+                    <td>{{getMatchName(list.hostId)}}</td>
+                    <td>{{list.hostScore}}-{{list.GuestScore}}</td>
+                    <td>{{getMatchName(list.guestId)}}</td>
+                    <td>
+                         <a href="#/detail/{{list.betId}}">统计</a>
+                         <a href="#/analysis/{{list.hostId}}/{{list.guestId}}">分析</a>
+                         <a href="#/teams/{{list.hostId}}/{{list.guestId}}">球队分析</a>
+                    </td>
+                    <td></td>
+                    <td>。。。</td>
+                </tr>
+            </tbody>
+       </table>
+    </div>
+</div>

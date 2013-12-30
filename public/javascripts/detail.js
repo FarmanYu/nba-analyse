@@ -1,0 +1,1 @@
+function detailCtrl($scope,$http,$location){}

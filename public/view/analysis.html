@@ -1,0 +1,352 @@
+<div ng-controller="analysisCtrl">
+<div class="analysisCon">
+     <div class="table_playerContrast">
+            <table width="100%" ng-show="player.table.length>0">
+                 <thead>
+                      <tr>
+                           <th>球队</th>
+                           <th width="260">姓名</th>
+                           <th>位置</th>
+                           <th>身高</th>
+                           <th>体重</th>
+                           <th>年龄</th>
+                           
+                      </tr>
+                 </thead>
+                 <tbody>
+                      <tr ng-repeat="t in player.table" ng-dblclick="player.del($index)">
+                          <td>{{t.teamName}}</td>
+                          <td>{{t.playerName}}</td>
+                          <td>{{t.position}}</td>
+                          <td ng-class="player.getHeightStyle(t.height)">{{t.height}}m</td>
+                          <td>{{t.weight}}kg</td>
+                          <td>{{t.age}}</td>                          
+                      </tr>
+                 </tbody>
+            </table>
+            <table width="100%" ng-repeat="g in game.gameContentList">
+                 <thead>
+                      <tr>
+                           <th>球队</th>
+                           <th>首发</th>
+                           <th>位置</th>
+                           <th>球员</th>
+                           <th>内线</th>
+                           <th>中投</th>
+                           <th>三分</th>
+                           <th>总和</th>
+                           <td>罚球</td>
+                           <th>得分</th>
+                           <th>失误</th>
+                           <th>前场篮板</th>
+                           <th>上场时间</th>
+                      </tr>
+                 </thead>
+                 <tbody>
+                      
+                      <tr  ng-repeat="p in g.host.on" ng-show="game.showPosition(p)" ng-statistics-total="{{total(p)}}">
+                          <td>{{g.host.teamName}}</td>
+                          <td>{{p.position}}</td>
+                          <td>{{p.deafultposition}}</td>
+                          <td>{{p.player_name}}</td>
+                          <td>{{p.inside_made}}/{{p.inside_total}}</td>
+                          <td>{{p.outer_made}}/{{p.outer_total}}</td>
+                          <td>{{p.three_made}}/{{p.three_total}}</td>
+                          <td>{{p.total_mode}}/{{p.total_total}}</td>
+                          <td>{{p.free}}</td>
+                          <td>{{p.points}}</td>
+                          <td>{{p.turn}}</td>
+                          <td>{{p.off}}</td>
+                          <td>{{p.minutes}}</td>
+                      </tr>
+                     <tr style=" background:#66FFCC;">
+                          <td>总和</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>{{inside_made}}/{{inside_total}}  ({{inside_total_bio}})</td>
+                          <td>{{outer_made_total}}/{{outer_total}}  ({{outer_total_bio}})</td>
+                          <td>{{three_made}}/{{three_total}}  ({{three_total_bio}})</td>
+                          <td></td>
+                          <td>{{g.host.total.free}}</td>
+                          <td>{{g.host.total.points}}</td>
+                          <td>{{g.host.total.turn}}</td>
+                          <td>{{g.host.total.off}}</td>
+                          <td>{{g.host.total.minutes}}</td>
+                      </tr>
+                      <tr style=" background:red;">
+                          <td>总和</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>{{inside_made_s}}/{{inside_total_s}}  ({{inside_total_bio_s}})</td>
+                          <td>{{outer_made_total_s}}/{{outer_total_s}}  ({{outer_total_bio_s}})</td>
+                          <td>{{three_made_s}}/{{three_total_s}}  ({{three_total_bio_s}})</td>
+                          <td></td>
+                          <td>{{g.guest.total.free}}</td>
+                          <td>{{g.guest.total.points}}</td>
+                          <td>{{g.guest.total.turn}}</td>
+                          <td>{{g.guest.total.off}}</td>
+                          <td>{{g.guest.total.minutes}}</td>
+                      </tr>
+                      <tr  ng-repeat="q in g.guest.on" ng-show="game.showPosition(q)"  ng-statistics-total-s="{{total(q)}}">
+                          <td>{{g.guest.teamName}}</td>
+                          <td>{{q.position}}</td>
+                          <td>{{q.deafultposition}}</td>
+                          <td>{{q.player_name}}</td>
+                          <td>{{q.inside_made}}/{{q.inside_total}}</td>
+                          <td>{{q.outer_made}}/{{q.outer_total}}</td>
+                          <td>{{q.three_made}}/{{q.three_total}}</td>
+                          <td>{{q.total_mode}}/{{q.total_total}}</td>
+                          <td>{{q.free}}</td>
+                          <td>{{q.points}}</td>
+                          <td>{{q.turn}}</td>
+                          <td>{{q.off}}</td>
+                          <td>{{q.minutes}}</td>
+                      </tr>
+                 </tbody>
+            </table>
+     </div>
+     <div class="analysis_result">
+           <h2>分析结果</h2>
+           <div class="host_result">
+                 <h3>host</h3>
+                 <div class="item">
+                      <label>失　　误：</label>
+                      <div class="grade_box">
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                      </div>
+                      <div class="">3分</div>
+                 </div>
+                 <div class="item">
+                      <label>进攻篮板：</label>
+                      <div class="grade_box">
+                          <span class="bg cur"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                      </div>
+                      <div class="">1分</div>
+                 </div>
+                 <div class="item">
+                      <label>盖　　帽：</label>
+                      <div class="grade_box">
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                      </div>
+                      <div class="">3分</div>
+                 </div>
+                 <div class="item">
+                      <label>快攻得分：</label>
+                      <div class="grade_box">
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg"></span>
+                      </div>
+                      <div class="">4分</div>
+                 </div>
+                 <div class="item">
+                      <label>心　　态：</label>
+                      <div class="grade_box">
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                      </div>
+                      <div class="">2分</div>
+                 </div>
+                 <div class="">
+                      <h3>得分方式：</h3>
+                      <div class="item">
+                           <label>内线：</label>
+                           <span class="mark" style="color:red;">↑</span>
+                           <span class="mark">↓</span>
+                      </div>
+                      <div class="item">
+                           <label>中投：</label>
+                           <span class="mark" style="color:red;">↑</span>
+                           <span class="mark">↓</span>
+                      </div>
+                      <div class="item">
+                           <label>三分：</label>
+                           <span class="mark">↑</span>
+                           <span class="mark" style="color:red;">↓</span>
+                      </div>
+                 </div>
+                 <div class="">
+                      <h3>出手次数：</h3> 
+                 </div>
+           </div>
+           <div class="guest_result">
+                 <h3>guest</h3>
+                 <div class="item">
+                      <label>失　　误：</label>
+                      <div class="grade_box">
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                      </div>
+                      <div class="">3分</div>
+                 </div>
+                 <div class="item">
+                      <label>进攻篮板：</label>
+                      <div class="grade_box">
+                          <span class="bg cur"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                      </div>
+                      <div class="">1分</div>
+                 </div>
+                 <div class="item">
+                      <label>盖　　帽：</label>
+                      <div class="grade_box">
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg"></span>
+                          <span class="bg"></span>
+                      </div>
+                      <div class="">3分</div>
+                 </div>
+                 <div class="item">
+                      <label>快攻得分：</label>
+                      <div class="grade_box">
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg cur"></span>
+                          <span class="bg"></span>
+                      </div>
+                      <div class="">4分</div>
+                 </div>
+                  <div class="">
+                      <h3>得分方式：</h3>
+                      <div class="item">
+                           <label>内线：</label>
+                           <span class="mark" style="color:red;">↑</span>
+                           <span class="mark">↓</span>
+                      </div>
+                      <div class="item">
+                           <label>中投：</label>
+                           <span class="mark" style="color:red;">↑</span>
+                           <span class="mark">↓</span>
+                      </div>
+                      <div class="item">
+                           <label>三分：</label>
+                           <span class="mark">↑</span>
+                           <span class="mark" style="color:red;">↓</span>
+                      </div>
+                 </div>
+           </div>
+           <div class="clear"></div>
+           <!--<div class="score_result">
+                 <h3>得分方式</h3> 
+                 <div class="host"></div>
+           </div>-->
+     </div>
+</div>
+<div class="playerBar">
+     <h2>player</h2>
+     <div style="padding:5px 5px;">
+           <select   ng-model="teamId" class="w80" ng-change="player.refreshPlayerList()">
+                <option ng-repeat="team in teams" value="{{team.id}}">{{team.name}}</option>
+           </select>
+           <select  class="w36" ng-model="game.count">
+               <option>1</option>
+               <option>2</option>
+               <option>3</option>
+               <option>5</option>
+               <option>8</option>
+               <option>10</option>
+               <option>20</option>
+               <option>30</option>
+           </select>
+           <select  class="w80" ng-model="game.type">
+               <option>host</option>
+               <option>guest</option>
+           </select>
+           <input type="button" value="查询" ng-click="game.query()"/>
+           <select  class="w80" ng-model="game.position">
+               <option>所有</option>
+               <option>后卫</option>
+               <option>中锋/前锋</option>
+           </select>
+           <select  class="w80" ng-model="game.teamPeople">
+               <option value="all">所有</option>
+               <option ng-repeat="p in player.list" value="{{p.playerId}}">{{p.playerName.split(",")[0]}}</option>
+           </select>
+           <select  class="w36" ng-model="game.joins">
+               <option value="on">上场</option>
+               <option value="off">未上场</option>
+           </select>
+      </div>
+     <div class="playerList">
+          <div class="tab_con">
+              <div class="hostPlayer">
+                  <div class="center">
+                      <h3>中锋</h3>
+                      <a href="javascript:void(0);" ng-repeat="p in player.list" ng-show="p.position.split('/')[0]=='中锋'" ng-click="player.add(p)">{{p.playerName.split(",")[0]}}</a> 
+                  </div>
+                  <div class="guard">
+                      <h3>后卫</h3>
+                      <a href="javascript:void(0);" ng-repeat="p in player.list" ng-show="p.position.split('/')[0]=='后卫'" ng-click="player.add(p)">{{p.playerName.split(",")[0]}}</a>
+                  </div>
+                  <div class="forward">
+                      <h3>前锋</h3>
+                      <a href="javascript:void(0);" ng-repeat="p in player.list" ng-show="p.position.split('/')[0]=='前锋'" ng-click="player.add(p)">{{p.playerName.split(",")[0]}}</a>
+                  </div>
+              </div>
+              <div class="guestPlayer" style="display:none;">
+              
+              </div>
+          </div>
+     </div>
+</div>
+<div class="teamBar">
+      <h2>team Top</h2>
+      <div class="playerList">
+           <div class="tab">
+             <select  class="w80" ng-model="team.type">
+               <option>host</option>
+               <option>guest</option>
+             </select>
+             <select  class="w36" ng-model="team.count">
+               <option>1</option>
+               <option>2</option>
+               <option>3</option>
+               <option>5</option>
+               <option>8</option>
+               <option>10</option>
+               <option>20</option>
+               <option>30</option>
+           </select>
+           <input type="button" value="查询" ng-click="team.query()"/>
+          </div>
+          <div class="tab_con">
+               <a href="javascript:void(0);">节奏</a>
+               <a href="javascript:void(0);">失误</a>
+               <a href="javascript:void(0);">罚球</a>
+               <a href="javascript:void(0);">进攻</a>
+               <a href="javascript:void(0);">防守</a>
+               <a href="javascript:void(0);">进攻偏向</a>
+               <a href="javascript:void(0);">主要防守位置</a>
+          </div>  
+      </div>
+     
+</div>
+</div>

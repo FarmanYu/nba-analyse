@@ -1,0 +1,53 @@
+
+
+<div ng-controller="teamsCtrl">
+     <div class="playerBar">
+         <h2>teams</h2>
+         <div style="padding:5px 5px;">
+               <select   ng-model="teamId" class="w80"  ng-change="player.refreshPlayerList()">
+                    <option ng-repeat="team in teams" value="{{team.id}}">{{team.name}}</option>
+               </select>
+               <select  class="w36" ng-model="team.count">
+                   <option>1</option>
+                   <option>2</option>
+                   <option>3</option>
+                   <option>5</option>
+                   <option>8</option>
+                   <option>10</option>
+                   <option>20</option>
+                   <option>30</option>
+               </select>
+               <select  class="w80" ng-model="team.type">
+                   <option>all</option>
+                   <option>host</option>
+                   <option>guest</option>
+               </select>
+               <input type="button" value="查询" ng-click="team.query()"/>
+               <select  class="w80" ng-model="player.teamPeople">
+                   <option value="all">所有</option>
+                   <option ng-repeat="p in player.list" value="{{p.playerId}}">{{p.playerName.split(",")[0]}}</option>
+               </select>
+               <select  class="w36" ng-model="team.joins">
+                   <option value="on">上场</option>
+                   <option value="off">未上场</option>
+               </select>
+               <input type="button" value="查询所有的比赛" ng-click="team.queryAll()"/>
+          </div>
+         <div class="playerList">
+              <div class="tab_con">
+                  <div class="hostPlayer">
+                      
+                  </div>
+              </div>
+         </div>
+    </div>
+    <div id="teamsContainer">
+          <div class="Contrast_1"></div>
+          <div class="Contrast_2"></div>
+          <div class="Contrast_0"></div>
+          <div class="Contrast_6"></div>
+          <div class="Contrast_3"></div>
+          <div class="Contrast_4"></div>
+          <div class="Contrast_5"></div>
+    </div>
+</div>
